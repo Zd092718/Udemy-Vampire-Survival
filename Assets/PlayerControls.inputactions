@@ -1,14 +1,14 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player",
-            "id": "d8da46a4-5a20-4e31-896b-c17b6723fdeb",
+            "id": "8b95b6f9-400d-4c11-8119-9a152335507c",
             "actions": [
                 {
                     "name": "Move",
                     "type": "Value",
-                    "id": "64943de1-8c39-4f3d-9334-3783994a53da",
+                    "id": "11221eba-26db-45fa-bb8e-e95a675f3ea1",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -18,7 +18,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "addff6f1-3ea7-45e8-a039-29f2d3e5dc35",
+                    "id": "d7b6d7b5-cf42-4450-a946-4417269cd1bc",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
@@ -29,7 +29,7 @@
                 },
                 {
                     "name": "WASD",
-                    "id": "43f65b33-aa2a-4ba2-85e6-5ffa28369d36",
+                    "id": "b169c3b3-1632-4b18-8d65-e785b43c9c2a",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -40,44 +40,44 @@
                 },
                 {
                     "name": "up",
-                    "id": "02313aeb-ea06-46fe-9d02-40792ca81672",
+                    "id": "5f451b50-8628-4893-abd3-59ff8add12b5",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard And Mouse",
+                    "groups": "Keyboard & Mouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "2c02f094-a1c0-4fc1-a943-aedb56b502e2",
+                    "id": "7d859ffa-4175-4eaa-bd32-92035c832145",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard And Mouse",
+                    "groups": "Keyboard & Mouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "a7ebd3fb-2be7-4c5c-b2a6-b454c087c03f",
+                    "id": "e804aba6-a60c-4b87-8c67-728e8eed349b",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard And Mouse",
+                    "groups": "Keyboard & Mouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "ff9c6593-b942-42da-9a82-65ec4d9349b6",
+                    "id": "d9df08dd-ce2b-4889-b1eb-842e8b9b2326",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard And Mouse",
+                    "groups": "Keyboard & Mouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -87,8 +87,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard And Mouse",
-            "bindingGroup": "Keyboard And Mouse",
+            "name": "Keyboard & Mouse",
+            "bindingGroup": "Keyboard & Mouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
