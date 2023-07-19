@@ -8,6 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     private Vector3 moveDirection;
+    private Animator anim;
+
+    private void Start() {
+        anim = GetComponent<Animator>();    
+    }
 
     private void FixedUpdate() {
         Move();
@@ -17,5 +22,11 @@ public class PlayerController : MonoBehaviour
 
         moveDirection = gameInput.GetMovementVectorNormalized();
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        if(moveDirection != Vector3.zero) {
+            anim.SetBool("IsWalking", true);
+        } else {
+            anim.SetBool("IsWalking", false);
+        }
     }
 }
