@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        target = FindObjectOfType<PlayerController>().transform;
+        target = PlayerHealthController.Instance.transform;
     }
 
     private void Update() {
@@ -34,7 +34,6 @@ public class EnemyController : MonoBehaviour
     }
 
     private void GiveChase() {
-        if (target == null) return;
         rb.velocity = (target.position - transform.position).normalized;
     }
 }
