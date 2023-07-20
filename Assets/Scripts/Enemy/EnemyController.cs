@@ -14,12 +14,12 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();
         target = FindObjectOfType<PlayerController>().transform;
     }
 
     private void Update() {
-        rb.velocity = (target.position - transform.position).normalized;
+        GiveChase();
 
         if(hitCounter > 0f) {
             hitCounter -= Time.deltaTime;
@@ -29,8 +29,12 @@ public class EnemyController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player") && hitCounter <= 0) {
             PlayerHealthController.Instance.TakeDamage(damageDone);
-
             hitCounter = hitWaitTime;
         }
+    }
+
+    private void GiveChase() {
+        if (target == null) return;
+        rb.velocity = (target.position - transform.position).normalized;
     }
 }

@@ -20,13 +20,13 @@ public class PlayerHealthController : MonoBehaviour
 
     void Start()
     {
+        healthBarImage.fillAmount = maxHealth;
         currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthBarImage.fillAmount = (float)currentHealth / maxHealth;
         if(Input.GetKeyDown(KeyCode.P)) {
             TakeDamage(5);
         }
@@ -39,5 +39,6 @@ public class PlayerHealthController : MonoBehaviour
             //Die
             gameObject.SetActive(false);
         }
+        healthBarImage.fillAmount = (float)currentHealth / maxHealth;
     }
 }

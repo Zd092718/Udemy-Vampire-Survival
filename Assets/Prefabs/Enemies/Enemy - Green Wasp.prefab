@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 3261817665551452879}
-  speed: 1
-  minSize: 0.7
+  speed: 0.5
+  minSize: 0.9
   maxSize: 1.1
 --- !u!1 &4125783456861295774
 GameObject:
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 4604074355527375124}
   - component: {fileID: 5495821221455137530}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: Enemy - Green Wasp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,5 +211,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  damageDone: 10
+  damageDone: 5
   hitWaitTime: 1
