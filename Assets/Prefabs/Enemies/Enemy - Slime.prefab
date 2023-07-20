@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 3261817665551452879}
   speed: 0.5
-  minSize: 0.9
-  maxSize: 1.1
+  minSize: 0.7
+  maxSize: 0.9
 --- !u!1 &4125783456861295774
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 5495821221455137530}
   m_Layer: 0
   m_Name: Enemy - Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,3 +213,4 @@ MonoBehaviour:
   moveSpeed: 2
   damageDone: 8
   hitWaitTime: 1
+  health: 5
