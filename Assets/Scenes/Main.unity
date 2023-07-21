@@ -109708,6 +109708,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentExperience: 0
+  expLevels: 0000000005000000080000000b0000000f0000001300000018000000
+  currentLevel: 1
+  levelCount: 100
 --- !u!4 &681639845
 Transform:
   m_ObjectHideFlags: 0
@@ -110682,7 +110685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameInput: {fileID: 1363529345}
   moveSpeed: 3
-  pickupRange: 2
+  pickupRange: 1.5
 --- !u!224 &2897626002806578142
 RectTransform:
   m_ObjectHideFlags: 0
