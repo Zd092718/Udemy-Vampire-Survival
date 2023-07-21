@@ -108,10 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc74f7da1c626044a98b7fce2c925ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 4125783456861295774, guid: e110db60c62e12c44be9bdede376a65a, type: 3}
-  - {fileID: 4125783456861295774, guid: 95720c2ebe9b8de4e9c3f238107f7776, type: 3}
-  - {fileID: 4125783456861295774, guid: cdb2190fe2888a44e987aefc32cc07df, type: 3}
+  enemyPrefab: {fileID: 4125783456861295774, guid: e110db60c62e12c44be9bdede376a65a, type: 3}
   timeToSpawn: 1
   minSpawn: {fileID: 437180836901419150}
   maxSpawn: {fileID: 3634743987925256605}

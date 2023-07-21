@@ -40,5 +40,6 @@ public class PlayerHealthController : MonoBehaviour
             gameObject.SetActive(false);
         }
         healthBarImage.fillAmount = (float)currentHealth / maxHealth;
+        DamageNumberController.Instance.SpawnDamage(damage, transform.position, Color.red);
     }
 }

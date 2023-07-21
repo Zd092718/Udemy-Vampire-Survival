@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 856212575
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1904225746, guid: 99f10abcf979e904b883da0c6922d74f, type: 3}
+  m_Sprite: {fileID: -693617150, guid: 99f10abcf979e904b883da0c6922d74f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 3261817665551452879}
   speed: 0.5
-  minSize: 0.7
-  maxSize: 0.9
+  minSize: 0.9
+  maxSize: 1.1
 --- !u!1 &4125783456861295774
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 4604074355527375124}
   - component: {fileID: 5495821221455137530}
   m_Layer: 0
-  m_Name: Enemy - Scorpion
+  m_Name: Enemy - Golem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.38
 --- !u!50 &4604074355527375124
@@ -210,8 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408ff4368a629f14d87d2e0f0e50dd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.3
-  damageDone: 5
+  moveSpeed: 0.7
+  damageDone: 6
   hitWaitTime: 1
-  health: 8
+  health: 15
   knockbackTime: 0.5

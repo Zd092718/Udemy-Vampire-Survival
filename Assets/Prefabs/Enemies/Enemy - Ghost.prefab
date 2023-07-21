@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 856212575
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1633049766, guid: 99f10abcf979e904b883da0c6922d74f, type: 3}
+  m_Sprite: {fileID: -112153730, guid: 99f10abcf979e904b883da0c6922d74f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 4604074355527375124}
   - component: {fileID: 5495821221455137530}
   m_Layer: 0
-  m_Name: Enemy - Slime
+  m_Name: Enemy - Ghost
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.38
+  m_Radius: 0.41
 --- !u!50 &4604074355527375124
 Rigidbody2D:
   serializedVersion: 4
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  damageDone: 8
+  damageDone: 13
   hitWaitTime: 1
-  health: 5
+  health: 7
+  knockbackTime: 0.5

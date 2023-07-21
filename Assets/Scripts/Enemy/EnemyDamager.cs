@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamager : MonoBehaviour
-{
+public class EnemyDamager : MonoBehaviour {
     [SerializeField] private float damage = 5f;
     [SerializeField] private float growSpeed = 5f;
     [SerializeField] private float lifeTime;
     [SerializeField] private bool shouldKnockback;
+    [SerializeField] private bool destroyParent;
     private Vector3 targetSize;
 
 
@@ -30,6 +30,9 @@ public class EnemyDamager : MonoBehaviour
             targetSize = Vector3.zero;
             if (transform.localScale.x == 0f) {
                 Destroy(gameObject);
+                if (destroyParent) {
+                    Destroy(transform.parent.gameObject);
+                }
             }
         }
     }

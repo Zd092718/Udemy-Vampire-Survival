@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  damageDone: 5
+  damageDone: 2
   hitWaitTime: 1
   health: 5
+  knockbackTime: 0.5
