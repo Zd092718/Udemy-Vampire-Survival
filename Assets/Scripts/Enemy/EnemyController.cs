@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float hitWaitTime = 1f;
     [SerializeField] private float health = 5f;
     [SerializeField] private float knockbackTime = .5f;
+    [SerializeField] private ExpPickup expPickup;
+    [SerializeField] private int enemyExpValue;
     private float knockbackCounter;
     private float hitCounter;
     private Rigidbody2D rb;
@@ -58,6 +60,8 @@ public class EnemyController : MonoBehaviour
 
         if(health <= 0f) {
             Destroy(gameObject);
+            Instantiate(expPickup.gameObject, transform.position, Quaternion.identity);
+            expPickup.ExpValue = enemyExpValue;
         }
 
         DamageNumberController.Instance.SpawnDamage(damage, transform.position, Color.white);

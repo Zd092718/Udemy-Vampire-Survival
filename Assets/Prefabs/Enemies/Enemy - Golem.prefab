@@ -215,3 +215,5 @@ MonoBehaviour:
   hitWaitTime: 1
   health: 15
   knockbackTime: 0.5
+  expPickup: {fileID: 488036671219425289, guid: e60ac0211c9f4f9459c684f789dce500, type: 3}
+  enemyExpValue: 10

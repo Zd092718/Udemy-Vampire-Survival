@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour {
                 if (spawnCounter <= 0) {
                     spawnCounter = waves[currentWave].timeBetweenSpawns;
 
-                    GameObject newEnemy = Instantiate(waves[currentWave].enemyToSpawn, SelectSpawnPoint(), Quaternion.identity);
+                    GameObject newEnemy = Instantiate(waves[currentWave].enemyToSpawn, SelectSpawnPoint(), Quaternion.identity, enemyPool.transform);
                     spawnedEnemies.Add(newEnemy);
                 }
             }
