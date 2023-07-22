@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExpPickup : MonoBehaviour
 {
-    [SerializeField] private int expValue;
+    [SerializeField] private int expValue = 1;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float timeBetweenChecks = .2f;
     private float checkCounter;

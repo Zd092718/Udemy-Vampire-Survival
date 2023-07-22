@@ -116,7 +116,7 @@ Transform:
   m_Children:
   - {fileID: 4430806312979238332}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &3431798170783790579
 CircleCollider2D:
@@ -165,6 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96be2d0baa0b894418c90c5d649a3a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expValue: 5
+  expValue: 1
   moveSpeed: 1
   timeBetweenChecks: 0.2

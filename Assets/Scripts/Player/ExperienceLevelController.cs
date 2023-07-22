@@ -44,7 +44,9 @@ public class ExperienceLevelController : MonoBehaviour
 
         //PlayerController.Instance.ActiveWeapon.LevelUp();
         UIController.Instance.LevelUpPanel.SetActive(true);
+        UIController.Instance.SetSelected();
+        UIController.Instance.IsLevelingUp = true;
         Time.timeScale = 0f;
-        UIController.Instance.LevelUpButtons[1].UpdateButtonDisplay(PlayerController.Instance.ActiveWeapon);
+        //UIController.Instance.LevelUpButtons[1].UpdateButtonDisplay(PlayerController.Instance.ActiveWeapon);
     }
 }

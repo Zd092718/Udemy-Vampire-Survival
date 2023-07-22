@@ -24,6 +24,7 @@ public class LevelUpSelectionButton : MonoBehaviour
         if(assignedWeapon != null) {
             assignedWeapon.LevelUp();
             UIController.Instance.LevelUpPanel.SetActive(false);
+            UIController.Instance.IsLevelingUp = false;
             Time.timeScale = 1.0f;
         }
     }
