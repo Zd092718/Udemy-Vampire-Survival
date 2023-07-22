@@ -10,6 +10,9 @@ public class EnemyDamager : MonoBehaviour {
     [SerializeField] private bool destroyParent;
     private Vector3 targetSize;
 
+    public float Damage { get => damage; set => damage = value; }
+    public float GrowSpeed { get => growSpeed; set => growSpeed = value; }
+    public float LifeTime { get => lifeTime; set => lifeTime = value; }
 
     private void Start() {
 

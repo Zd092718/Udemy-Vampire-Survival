@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class ExperienceLevelController : MonoBehaviour
 {
@@ -29,6 +29,8 @@ public class ExperienceLevelController : MonoBehaviour
         if(currentExperience >= expLevels[currentLevel]) {
             LevelUp();
         }
+
+        UIController.Instance.UpdateExperience(currentExperience, expLevels[currentLevel], currentLevel);
     }
 
     public void LevelUp() {
@@ -39,5 +41,10 @@ public class ExperienceLevelController : MonoBehaviour
         if(currentLevel >= expLevels.Count) {
             currentLevel = expLevels.Count - 1;
         }
+
+        //PlayerController.Instance.ActiveWeapon.LevelUp();
+        UIController.Instance.LevelUpPanel.SetActive(true);
+        Time.timeScale = 0f;
+        UIController.Instance.LevelUpButtons[1].UpdateButtonDisplay(PlayerController.Instance.ActiveWeapon);
     }
 }
