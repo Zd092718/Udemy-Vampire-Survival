@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
     [Header("Menu Objects")]
@@ -86,6 +87,7 @@ public class MenuManager : MonoBehaviour {
 
     public void OnMainMenuPress() {
         //Go back to main menu
+        //SceneManager.LoadScene("Main");
     }
 
     #endregion
