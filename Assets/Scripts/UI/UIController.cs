@@ -38,4 +38,9 @@ public class UIController : MonoBehaviour
     public void SetSelected() {
         EventSystem.current.SetSelectedGameObject(levelUpSelectedFirst);
     }
+
+    public void SkipLevelUp() {
+        levelUpPanel.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
 }

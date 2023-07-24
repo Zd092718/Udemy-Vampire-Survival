@@ -6,17 +6,26 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
 
-    [SerializeField] private GameInput gameInput;
+    [Header("Settings")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float pickupRange = 1.5f;
-    //[SerializeField] private Weapon activeWeapon;
+    [SerializeField] private int maxWeapons = 3;
 
+    [Header("References")]
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private List<Weapon> unassignedWeapons, assignedWeapons;
+    private List<Weapon> fullyLeveledWeapons = new List<Weapon>();
     private Vector3 moveDirection;
     private Animator anim;
 
+    #region Properties
     public float PickupRange { get => pickupRange; set => pickupRange = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    //public Weapon ActiveWeapon { get => activeWeapon; set => activeWeapon = value; }
+    public List<Weapon> UnassignedWeapons { get => unassignedWeapons; set => unassignedWeapons = value; }
+    public List<Weapon> AssignedWeapons { get => assignedWeapons; set => assignedWeapons = value; }
+    public int MaxWeapons { get => maxWeapons; set => maxWeapons = value; }
+    public List<Weapon> FullyLeveledWeapons { get => fullyLeveledWeapons; set => fullyLeveledWeapons = value; }
+    #endregion
 
     private void Awake() {
         if(Instance != null) {
@@ -25,7 +34,9 @@ public class PlayerController : MonoBehaviour
         Instance = this;
     }
     private void Start() {
-        anim = GetComponent<Animator>();    
+        anim = GetComponent<Animator>();
+
+        AddWeapon(Random.Range(0, unassignedWeapons.Count));
     }
 
     private void FixedUpdate() {
@@ -42,5 +53,20 @@ public class PlayerController : MonoBehaviour
         } else {
             anim.SetBool("IsWalking", false);
         }
+    }
+
+    public void AddWeapon(int weaponNumber) {
+        if(weaponNumber < unassignedWeapons.Count) {
+            assignedWeapons.Add(unassignedWeapons[weaponNumber]);
+
+            unassignedWeapons[weaponNumber].gameObject.SetActive(true);
+            unassignedWeapons.RemoveAt(weaponNumber);
+        }
+    }
+
+    public void AddWeapon(Weapon weaponToAdd) {
+        weaponToAdd.gameObject.SetActive(true);
+        assignedWeapons.Add(weaponToAdd);
+        unassignedWeapons.Remove(weaponToAdd);
     }
 }

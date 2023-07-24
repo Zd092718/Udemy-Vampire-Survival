@@ -7,8 +7,11 @@ public class PlayerHealthController : MonoBehaviour
 {
     public static PlayerHealthController Instance { get; private set; }
 
+    [Header("Settings")]
     [SerializeField] private float currentHealth, maxHealth;
+    [Header("References")]
     [SerializeField] private Image healthBarImage;
+ 
 
 
     private void Awake() {

@@ -16,6 +16,10 @@ public class Weapon : MonoBehaviour {
         if(weaponLevel < stats.Count - 1) {
             weaponLevel++;
             statsUpdated = true;
+            if(weaponLevel >= stats.Count - 1) {
+                PlayerController.Instance.FullyLeveledWeapons.Add(this);
+                PlayerController.Instance.AssignedWeapons.Remove(this);
+            }
         }
     }
 }
