@@ -40,6 +40,7 @@ public class UIController : MonoBehaviour
     }
 
     public void SkipLevelUp() {
+        IsLevelingUp = false;
         levelUpPanel.SetActive(false);
         Time.timeScale = 1.0f;
     }

@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
     private void Start() {
         anim = GetComponent<Animator>();
 
-        AddWeapon(Random.Range(0, unassignedWeapons.Count));
+        if(assignedWeapons.Count == 0) {
+        AddWeapon(Random.Range(0, unassignedWeapons.Count)); 
+        }
     }
 
     private void FixedUpdate() {

@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDamager : MonoBehaviour {
+    [Header("Settings")]
     [SerializeField] private float damage = 5f;
     [SerializeField] private float growSpeed = 5f;
     [SerializeField] private float lifeTime;
     [SerializeField] private bool shouldKnockback;
     [SerializeField] private bool destroyParent;
+    [SerializeField] private bool damageOverTime;
+    [SerializeField] private float timeBetweenDamage;
+    private float damageCounter;
     private Vector3 targetSize;
+    private List<EnemyController> enemiesInRange = new List<EnemyController>();
 
+    #region Properties
     public float Damage { get => damage; set => damage = value; }
     public float GrowSpeed { get => growSpeed; set => growSpeed = value; }
     public float LifeTime { get => lifeTime; set => lifeTime = value; }
+    public float TimeBetweenDamage { get => timeBetweenDamage; set => timeBetweenDamage = value; }
+    #endregion
 
     private void Start() {
 
@@ -26,6 +34,22 @@ public class EnemyDamager : MonoBehaviour {
 
         lifeTime -= Time.deltaTime;
         DestroyAfterLifetime();
+
+        if (damageOverTime) {
+            damageCounter -= Time.deltaTime;
+
+            if (damageCounter <= 0) {
+                damageCounter = TimeBetweenDamage;
+                for(int i = 0; i < enemiesInRange.Count; i++) {
+                    if (enemiesInRange[i] != null) {
+                        enemiesInRange[i].TakeDamage(damage, shouldKnockback);
+                    } else {
+                        enemiesInRange.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+        }
     }
 
     public void DestroyAfterLifetime() {
@@ -41,8 +65,22 @@ public class EnemyDamager : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
-            enemy.TakeDamage(damage, shouldKnockback);
+        if (!damageOverTime) {
+            if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
+                enemy.TakeDamage(damage, shouldKnockback);
+            }
+        } else {
+            if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
+                enemiesInRange.Add(enemy);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (damageOverTime) {
+            if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
+                enemiesInRange.Remove(enemy);
+            }
         }
     }
 }
