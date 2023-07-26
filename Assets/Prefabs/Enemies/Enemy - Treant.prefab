@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 8928498876571702538}
   - component: {fileID: 4604074355527375124}
   - component: {fileID: 5495821221455137530}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy - Treant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -215,5 +215,4 @@ MonoBehaviour:
   hitWaitTime: 1
   health: 15
   knockbackTime: 0.5
-  expPickup: {fileID: 488036671219425289, guid: e60ac0211c9f4f9459c684f789dce500, type: 3}
   enemyExpValue: 8

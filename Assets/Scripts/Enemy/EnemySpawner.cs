@@ -9,22 +9,22 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] private int checkPerFrame;
     [SerializeField] private GameObject enemyPool;
     [SerializeField] private List<WaveInfo> waves = new List<WaveInfo>();
-    private int currentWave;
-    private float waveCounter;
-    private int enemyToCheck;
-    private float spawnCounter;
-    private Transform target;
-    private float despawnDistance;
-    private List<GameObject> spawnedEnemies = new List<GameObject>();
+    private int _currentWave;
+    private float _waveCounter;
+    private int _enemyToCheck;
+    private float _spawnCounter;
+    private Transform _target;
+    private float _despawnDistance;
+    private List<GameObject> _spawnedEnemies = new List<GameObject>();
 
     void Start() {
         //spawnCounter = timeToSpawn;
 
-        target = PlayerHealthController.Instance.transform;
+        _target = PlayerHealthController.Instance.transform;
 
-        despawnDistance = Vector3.Distance(transform.position, maxSpawn.position) + 4f;
+        _despawnDistance = Vector3.Distance(transform.position, maxSpawn.position) + 4f;
 
-        currentWave = -1;
+        _currentWave = -1;
         GoToNextWave();
     }
 
@@ -38,41 +38,41 @@ public class EnemySpawner : MonoBehaviour {
         //    spawnedEnemies.Add(newEnemy);
         //}
 
-        transform.position = target.position;
+        transform.position = _target.position;
 
         if (PlayerHealthController.Instance.gameObject.activeSelf) {
-            if (currentWave < waves.Count) {
-                waveCounter -= Time.deltaTime;
-                if (waveCounter <= 0) {
+            if (_currentWave < waves.Count) {
+                _waveCounter -= Time.deltaTime;
+                if (_waveCounter <= 0) {
                     GoToNextWave();
                 }
-                spawnCounter -= Time.deltaTime;
-                if (spawnCounter <= 0) {
-                    spawnCounter = waves[currentWave].timeBetweenSpawns;
+                _spawnCounter -= Time.deltaTime;
+                if (_spawnCounter <= 0) {
+                    _spawnCounter = waves[_currentWave].timeBetweenSpawns;
 
-                    GameObject newEnemy = Instantiate(waves[currentWave].enemyToSpawn, SelectSpawnPoint(), Quaternion.identity, enemyPool.transform);
-                    spawnedEnemies.Add(newEnemy);
+                    GameObject newEnemy = Instantiate(waves[_currentWave].enemyToSpawn, SelectSpawnPoint(), Quaternion.identity, enemyPool.transform);
+                    _spawnedEnemies.Add(newEnemy);
                 }
             }
         }
 
-        int checkTarget = enemyToCheck + checkPerFrame;
-        while (enemyToCheck < checkTarget) {
-            if (enemyToCheck < spawnedEnemies.Count) {
-                if (spawnedEnemies[enemyToCheck] != null) {
-                    if (Vector3.Distance(transform.position, spawnedEnemies[enemyToCheck].transform.position) > despawnDistance) {
-                        Destroy(spawnedEnemies[enemyToCheck]);
-                        spawnedEnemies.RemoveAt(enemyToCheck);
+        int checkTarget = _enemyToCheck + checkPerFrame;
+        while (_enemyToCheck < checkTarget) {
+            if (_enemyToCheck < _spawnedEnemies.Count) {
+                if (_spawnedEnemies[_enemyToCheck] != null) {
+                    if (Vector3.Distance(transform.position, _spawnedEnemies[_enemyToCheck].transform.position) > _despawnDistance) {
+                        Destroy(_spawnedEnemies[_enemyToCheck]);
+                        _spawnedEnemies.RemoveAt(_enemyToCheck);
                         checkTarget--;
                     } else {
-                        enemyToCheck++;
+                        _enemyToCheck++;
                     }
                 } else {
-                    spawnedEnemies.RemoveAt(enemyToCheck);
+                    _spawnedEnemies.RemoveAt(_enemyToCheck);
                     checkTarget--;
                 }
             } else {
-                enemyToCheck = 0;
+                _enemyToCheck = 0;
                 checkTarget = 0;
             }
         }
@@ -105,12 +105,12 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     public void GoToNextWave() {
-        currentWave++;
-        if (currentWave >= waves.Count) {
-            currentWave = waves.Count - 1;
+        _currentWave++;
+        if (_currentWave >= waves.Count) {
+            _currentWave = waves.Count - 1;
         }
-        waveCounter = waves[currentWave].waveLength;
-        spawnCounter = waves[currentWave].timeBetweenSpawns;
+        _waveCounter = waves[_currentWave].waveLength;
+        _spawnCounter = waves[_currentWave].timeBetweenSpawns;
     }
 }
 

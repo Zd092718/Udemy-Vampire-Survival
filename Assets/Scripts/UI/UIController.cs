@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+// ReSharper disable All
 
 public class UIController : MonoBehaviour
 {
@@ -16,10 +17,35 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject levelUpPanel;
     [SerializeField] private GameObject levelUpSelectedFirst;
 
+
+    #region Properties
+
     public bool IsLevelingUp { get; set; }
 
-    public LevelUpSelectionButton[] LevelUpButtons { get => levelUpButtons; set => levelUpButtons = value; }
-    public GameObject LevelUpPanel { get => levelUpPanel; set => levelUpPanel = value; }
+    public LevelUpSelectionButton[] LevelUpButtons
+    {
+        get
+        {
+            return levelUpButtons;
+        }
+        set
+        {
+            levelUpButtons = value;
+        }
+    }
+    public GameObject LevelUpPanel
+    {
+        get
+        {
+            return levelUpPanel;
+        }
+        set
+        {
+            levelUpPanel = value;
+        }
+    }
+
+    #endregion
 
     private void Awake() {
         if(Instance != null) {

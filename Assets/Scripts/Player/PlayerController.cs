@@ -14,17 +14,78 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameInput gameInput;
     [SerializeField] private List<Weapon> unassignedWeapons, assignedWeapons;
-    private List<Weapon> fullyLeveledWeapons = new List<Weapon>();
-    private Vector3 moveDirection;
-    private Animator anim;
+    private List<Weapon> _fullyLeveledWeapons = new List<Weapon>();
+    private Vector3 _moveDirection;
+    private Animator _anim;
 
     #region Properties
-    public float PickupRange { get => pickupRange; set => pickupRange = value; }
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public List<Weapon> UnassignedWeapons { get => unassignedWeapons; set => unassignedWeapons = value; }
-    public List<Weapon> AssignedWeapons { get => assignedWeapons; set => assignedWeapons = value; }
-    public int MaxWeapons { get => maxWeapons; set => maxWeapons = value; }
-    public List<Weapon> FullyLeveledWeapons { get => fullyLeveledWeapons; set => fullyLeveledWeapons = value; }
+    public float PickupRange
+    {
+        get
+        {
+            return pickupRange;
+        }
+        set
+        {
+            pickupRange = value;
+        }
+    }
+    public float MoveSpeed
+    {
+        get
+        {
+            return moveSpeed;
+        }
+        set
+        {
+            moveSpeed = value;
+        }
+    }
+    public List<Weapon> UnassignedWeapons
+    {
+        get
+        {
+            return unassignedWeapons;
+        }
+        set
+        {
+            unassignedWeapons = value;
+        }
+    }
+    public List<Weapon> AssignedWeapons
+    {
+        get
+        {
+            return assignedWeapons;
+        }
+        set
+        {
+            assignedWeapons = value;
+        }
+    }
+    public int MaxWeapons
+    {
+        get
+        {
+            return maxWeapons;
+        }
+        set
+        {
+            maxWeapons = value;
+        }
+    }
+    public List<Weapon> FullyLeveledWeapons
+    {
+        get
+        {
+            return _fullyLeveledWeapons;
+        }
+        set
+        {
+            _fullyLeveledWeapons = value;
+        }
+    }
+
     #endregion
 
     private void Awake() {
@@ -34,7 +95,7 @@ public class PlayerController : MonoBehaviour
         Instance = this;
     }
     private void Start() {
-        anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>();
 
         if(assignedWeapons.Count == 0) {
         AddWeapon(Random.Range(0, unassignedWeapons.Count)); 
@@ -47,13 +108,13 @@ public class PlayerController : MonoBehaviour
 
     private void Move() {
 
-        moveDirection = gameInput.GetMovementVectorNormalized();
-        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+        _moveDirection = gameInput.GetMovementVectorNormalized();
+        transform.position += _moveDirection * moveSpeed * Time.deltaTime;
 
-        if(moveDirection != Vector3.zero) {
-            anim.SetBool("IsWalking", true);
+        if(_moveDirection != Vector3.zero) {
+            _anim.SetBool("IsWalking", true);
         } else {
-            anim.SetBool("IsWalking", false);
+            _anim.SetBool("IsWalking", false);
         }
     }
 

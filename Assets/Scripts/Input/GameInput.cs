@@ -9,29 +9,29 @@ public class GameInput : MonoBehaviour
 
     public bool MenuOpenCloseInput { get; private set; }
 
-    private PlayerControls playerControls;
-    private PlayerInput playerInput;
-    private InputAction menuOpenCloseAction;
+    private PlayerControls _playerControls;
+    private PlayerInput _playerInput;
+    private InputAction _menuOpenCloseAction;
 
     private void Awake() {
 
         if(Instance == null) {
             Instance = this;
         }
-        playerControls = new PlayerControls();
-        playerControls.Player.Enable();
+        _playerControls = new PlayerControls();
+        _playerControls.Player.Enable();
 
-        playerInput = GetComponent<PlayerInput>();
-        menuOpenCloseAction = playerInput.actions["MenuOpenClose"];
+        _playerInput = GetComponent<PlayerInput>();
+        _menuOpenCloseAction = _playerInput.actions["MenuOpenClose"];
     }
 
     private void Update() {
-        MenuOpenCloseInput = menuOpenCloseAction.WasPressedThisFrame();
+        MenuOpenCloseInput = _menuOpenCloseAction.WasPressedThisFrame();
     }
 
     public Vector2 GetMovementVectorNormalized() {
 
-        Vector2 inputVector = playerControls.Player.Move.ReadValue<Vector2>();
+        Vector2 inputVector = _playerControls.Player.Move.ReadValue<Vector2>();
         inputVector = inputVector.normalized;
         return inputVector;
     }

@@ -8,7 +8,7 @@ public class LevelUpSelectionButton : MonoBehaviour {
     [SerializeField] private TMP_Text upgradeDescText, nameLevelText;
     [SerializeField] private Image weaponIcon;
 
-    private Weapon assignedWeapon;
+    private Weapon _mAssignedWeapon;
 
     public void UpdateButtonDisplay(Weapon weapon) {
         if (weapon.gameObject.activeSelf) {
@@ -21,15 +21,15 @@ public class LevelUpSelectionButton : MonoBehaviour {
         }
 
         weaponIcon.sprite = weapon.Icon;
-        assignedWeapon = weapon;
+        _mAssignedWeapon = weapon;
     }
 
     public void SelectUpgrade() {
-        if (assignedWeapon != null) {
-            if (assignedWeapon.gameObject.activeSelf) {
-                assignedWeapon.LevelUp();
+        if (_mAssignedWeapon != null) {
+            if (_mAssignedWeapon.gameObject.activeSelf) {
+                _mAssignedWeapon.LevelUp();
             } else {
-                PlayerController.Instance.AddWeapon(assignedWeapon);
+                PlayerController.Instance.AddWeapon(_mAssignedWeapon);
             }
             UIController.Instance.LevelUpPanel.SetActive(false);
             UIController.Instance.IsLevelingUp = false;

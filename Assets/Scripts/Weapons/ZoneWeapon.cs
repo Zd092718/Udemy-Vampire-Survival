@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZoneWeapon : Weapon
 {
     [SerializeField] private EnemyDamager damager;
-    private float spawnTime, spawnCounter;
+    private float _spawnTime, _spawnCounter;
 
     void Start()
     {
@@ -15,15 +15,15 @@ public class ZoneWeapon : Weapon
 
     void Update()
     {
-        if (statsUpdated) {
-            statsUpdated = false;  
+        if (StatsUpdated) {
+            StatsUpdated = false;  
 
             SetStats();
         }
-        spawnCounter -= Time.deltaTime;
-        if (spawnCounter <= 0f)
+        _spawnCounter -= Time.deltaTime;
+        if (_spawnCounter <= 0f)
         {
-            spawnCounter = spawnTime;
+            _spawnCounter = _spawnTime;
 
             Instantiate(damager, damager.transform.position, Quaternion.identity, transform).gameObject.SetActive(true);
         }
@@ -35,7 +35,7 @@ public class ZoneWeapon : Weapon
         damager.LifeTime = Stats[WeaponLevel].duration;
         damager.TimeBetweenDamage = Stats[WeaponLevel].speed;
         damager.transform.localScale = Vector3.one * Stats[WeaponLevel].range;
-        spawnTime = Stats[WeaponLevel].timeBetweenAttacks;
-        spawnCounter = 0f;
+        _spawnTime = Stats[WeaponLevel].timeBetweenAttacks;
+        _spawnCounter = 0f;
     }
 }

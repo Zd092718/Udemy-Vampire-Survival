@@ -11,40 +11,83 @@ public class EnemyDamager : MonoBehaviour {
     [SerializeField] private bool destroyParent;
     [SerializeField] private bool damageOverTime;
     [SerializeField] private float timeBetweenDamage;
-    private float damageCounter;
-    private Vector3 targetSize;
-    private List<EnemyController> enemiesInRange = new List<EnemyController>();
+    [SerializeField] private bool destroyOnImpact;
+    
+    private float _damageCounter;
+    private Vector3 _targetSize;
+    private List<EnemyController> _enemiesInRange = new List<EnemyController>();
 
     #region Properties
-    public float Damage { get => damage; set => damage = value; }
-    public float GrowSpeed { get => growSpeed; set => growSpeed = value; }
-    public float LifeTime { get => lifeTime; set => lifeTime = value; }
-    public float TimeBetweenDamage { get => timeBetweenDamage; set => timeBetweenDamage = value; }
+    public float Damage
+    {
+        get
+        {
+            return damage;
+        }
+        set
+        {
+            damage = value;
+        }
+    }
+    public float GrowSpeed
+    {
+        get
+        {
+            return growSpeed;
+        }
+        set
+        {
+            growSpeed = value;
+        }
+    }
+    public float LifeTime
+    {
+        get
+        {
+            return lifeTime;
+        }
+        set
+        {
+            lifeTime = value;
+        }
+    }
+    public float TimeBetweenDamage
+    {
+        get
+        {
+            return timeBetweenDamage;
+        }
+        set
+        {
+            timeBetweenDamage = value;
+        }
+    }
+
     #endregion
 
     private void Start() {
 
-        targetSize = transform.localScale;
+        _targetSize = transform.localScale;
         transform.localScale = Vector3.zero;
 
     }
 
     private void Update() {
-        transform.localScale = Vector3.MoveTowards(transform.localScale, targetSize, growSpeed * Time.deltaTime);
+        transform.localScale = Vector3.MoveTowards(transform.localScale, _targetSize, growSpeed * Time.deltaTime);
 
         lifeTime -= Time.deltaTime;
         DestroyAfterLifetime();
 
         if (damageOverTime) {
-            damageCounter -= Time.deltaTime;
+            _damageCounter -= Time.deltaTime;
 
-            if (damageCounter <= 0) {
-                damageCounter = TimeBetweenDamage;
-                for(int i = 0; i < enemiesInRange.Count; i++) {
-                    if (enemiesInRange[i] != null) {
-                        enemiesInRange[i].TakeDamage(damage, shouldKnockback);
+            if (_damageCounter <= 0) {
+                _damageCounter = TimeBetweenDamage;
+                for(int i = 0; i < _enemiesInRange.Count; i++) {
+                    if (_enemiesInRange[i] != null) {
+                        _enemiesInRange[i].TakeDamage(damage, shouldKnockback);
                     } else {
-                        enemiesInRange.RemoveAt(i);
+                        _enemiesInRange.RemoveAt(i);
                         i--;
                     }
                 }
@@ -54,7 +97,7 @@ public class EnemyDamager : MonoBehaviour {
 
     public void DestroyAfterLifetime() {
         if (lifeTime <= 0) {
-            targetSize = Vector3.zero;
+            _targetSize = Vector3.zero;
             if (transform.localScale.x == 0f) {
                 Destroy(gameObject);
                 if (destroyParent) {
@@ -68,10 +111,14 @@ public class EnemyDamager : MonoBehaviour {
         if (!damageOverTime) {
             if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
                 enemy.TakeDamage(damage, shouldKnockback);
+                if (destroyOnImpact)
+                {
+                    Destroy(gameObject);
+                }
             }
         } else {
             if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
-                enemiesInRange.Add(enemy);
+                _enemiesInRange.Add(enemy);
             }
         }
     }
@@ -79,7 +126,7 @@ public class EnemyDamager : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision) {
         if (damageOverTime) {
             if (collision.TryGetComponent<EnemyController>(out EnemyController enemy)) {
-                enemiesInRange.Remove(enemy);
+                _enemiesInRange.Remove(enemy);
             }
         }
     }

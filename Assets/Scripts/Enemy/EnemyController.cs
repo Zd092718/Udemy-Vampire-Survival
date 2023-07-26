@@ -10,46 +10,46 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float health = 5f;
     [SerializeField] private float knockbackTime = .5f;
     [SerializeField] private int enemyExpValue;
-    private float knockbackCounter;
-    private float hitCounter;
-    private Rigidbody2D rb;
-    private Transform target;
+    private float _knockbackCounter;
+    private float _hitCounter;
+    private Rigidbody2D _rb;
+    private Transform _target;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        target = PlayerHealthController.Instance.transform;
+        _rb = GetComponent<Rigidbody2D>();
+        _target = PlayerHealthController.Instance.transform;
     }
 
     private void Update() {
         CheckKnockback();
         GiveChase();
-        if (hitCounter > 0f) {
-            hitCounter -= Time.deltaTime;
+        if (_hitCounter > 0f) {
+            _hitCounter -= Time.deltaTime;
         }
     }
 
     private void CheckKnockback() {
-        if (knockbackCounter > 0) {
-            knockbackCounter -= Time.deltaTime;
+        if (_knockbackCounter > 0) {
+            _knockbackCounter -= Time.deltaTime;
 
             if (moveSpeed > 0) {
                 moveSpeed = -moveSpeed * 2f;
             }
 
-            if (knockbackCounter <= 0f) {
+            if (_knockbackCounter <= 0f) {
                 moveSpeed = Mathf.Abs(moveSpeed * .5f);
             }
         }
     }
     private void GiveChase() {
-        rb.velocity = (target.position - transform.position).normalized * moveSpeed;
+        _rb.velocity = (_target.position - transform.position).normalized * moveSpeed;
     }   
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("Player") && hitCounter <= 0) {
+        if (collision.gameObject.CompareTag("Player") && _hitCounter <= 0) {
             PlayerHealthController.Instance.TakeDamage(damageDone);
-            hitCounter = hitWaitTime;
+            _hitCounter = hitWaitTime;
         }
     }
 
@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
         TakeDamage(damage);
         if(shouldKnockback) {
 
-            knockbackCounter = knockbackTime;
+            _knockbackCounter = knockbackTime;
         }
     }
 }

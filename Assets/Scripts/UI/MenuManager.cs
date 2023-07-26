@@ -10,14 +10,14 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject settingsCanvas;
 
-    [Header("Scripts to Deactive on Pause")]
+    [Header("Scripts to Deactivated on Pause")]
     [SerializeField] private PlayerController player;
 
     [Header("First Selected Options")]
     [SerializeField] private GameObject mainMenuFirst;
     [SerializeField] private GameObject settingsMenuFirst;
 
-    private bool isPaused;
+    private bool _isPaused;
 
     private void Start() {
         mainMenuCanvas.SetActive(false);
@@ -27,7 +27,7 @@ public class MenuManager : MonoBehaviour {
     private void Update() {
         if (GameInput.Instance.MenuOpenCloseInput) {
             if (!UIController.Instance.IsLevelingUp) {
-                if (!isPaused) {
+                if (!_isPaused) {
                     Pause();
                 } else {
                     Unpause();
@@ -38,7 +38,7 @@ public class MenuManager : MonoBehaviour {
 
     #region Pause/Unpause Functions
     private void Pause() {
-        isPaused = true;
+        _isPaused = true;
         Time.timeScale = 0f;
         player.enabled = false;
 
@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour {
     }
 
     private void Unpause() {
-        isPaused = false;
+        _isPaused = false;
         Time.timeScale = 1f;
         player.enabled = true;
 

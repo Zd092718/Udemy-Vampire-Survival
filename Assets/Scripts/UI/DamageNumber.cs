@@ -8,16 +8,16 @@ public class DamageNumber : MonoBehaviour
     [SerializeField] private TMP_Text damageNumberText;
     [SerializeField] private float lifeTime;
     [SerializeField] private float floatSpeed = 1f;
-    private float lifeCounter;
+    private float _lifeCounter;
 
 
     // Update is called once per frame
     void Update()
     {
-        if(lifeCounter > 0) {
-            lifeCounter -= Time.deltaTime;
+        if(_lifeCounter > 0) {
+            _lifeCounter -= Time.deltaTime;
 
-            if(lifeCounter <= 0 ) {
+            if(_lifeCounter <= 0 ) {
                 DamageNumberController.Instance.PlaceInPool(this);
             }
         }
@@ -26,7 +26,7 @@ public class DamageNumber : MonoBehaviour
     }
 
     public void Setup(int damageDisplay) {
-        lifeCounter = lifeTime;
+        _lifeCounter = lifeTime;
 
         damageNumberText.text = damageDisplay.ToString();
     }

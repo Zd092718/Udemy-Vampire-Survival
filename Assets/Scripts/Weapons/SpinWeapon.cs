@@ -8,7 +8,7 @@ public class SpinWeapon : Weapon
     [SerializeField] private Transform holder, fireballToSpawn;
     [SerializeField] private float timeBetweenSpawn;
     [SerializeField] private EnemyDamager damager;
-    private float spawnCounter;
+    private float _spawnCounter;
 
     private void Start() {
         SetStats();
@@ -22,9 +22,9 @@ public class SpinWeapon : Weapon
 
         holder.rotation = Quaternion.Euler(0f, 0f, holder.rotation.eulerAngles.z + (rotateSpeed * Time.deltaTime * Stats[WeaponLevel].speed));
 
-        spawnCounter -= Time.deltaTime;
-        if(spawnCounter <= 0) {
-            spawnCounter = timeBetweenSpawn;
+        _spawnCounter -= Time.deltaTime;
+        if(_spawnCounter <= 0) {
+            _spawnCounter = timeBetweenSpawn;
 
             //Transform spawnedFireball = Instantiate(fireballToSpawn, fireballToSpawn.position, fireballToSpawn.rotation, holder);
             //spawnedFireball.gameObject.SetActive(true);
@@ -34,8 +34,8 @@ public class SpinWeapon : Weapon
                 Instantiate(fireballToSpawn, fireballToSpawn.position, Quaternion.Euler(0f, 0f, rot), holder).gameObject.SetActive(true);
             }
         }
-        if (statsUpdated) {
-            statsUpdated = false;  
+        if (StatsUpdated) {
+            StatsUpdated = false;  
 
             SetStats();
         }
@@ -50,7 +50,7 @@ public class SpinWeapon : Weapon
 
         damager.LifeTime = Stats[WeaponLevel].duration;
 
-        spawnCounter = 0f;
+        _spawnCounter = 0f;
     }
     
 }

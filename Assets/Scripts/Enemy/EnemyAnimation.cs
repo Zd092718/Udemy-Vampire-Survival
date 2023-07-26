@@ -8,24 +8,24 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float minSize, maxSize;
 
-    private float activeSize;
+    private float _activeSize;
     
     void Start()
     {
-        activeSize = maxSize;
+        _activeSize = maxSize;
         speed = speed * Random.Range(.75f, 1.25f);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one * activeSize, speed * Time.deltaTime);
+        transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one * _activeSize, speed * Time.deltaTime);
 
-        if (transform.localScale.x == activeSize) {
-            if(activeSize == maxSize) {
-                activeSize = minSize;
+        if (transform.localScale.x == _activeSize) {
+            if(_activeSize == maxSize) {
+                _activeSize = minSize;
             } else {
-                activeSize = maxSize;   
+                _activeSize = maxSize;   
             }
         }
     }

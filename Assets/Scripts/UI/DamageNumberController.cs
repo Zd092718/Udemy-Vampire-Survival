@@ -9,7 +9,7 @@ public class DamageNumberController : MonoBehaviour
     [SerializeField] private DamageNumber numberToSpawn;
     [SerializeField] private Transform numberCanvas;
 
-    private List<DamageNumber> numberPool = new List<DamageNumber>();
+    private List<DamageNumber> _numberPool = new List<DamageNumber>();
 
     private void Awake() {
         if(Instance != null) {
@@ -35,11 +35,11 @@ public class DamageNumberController : MonoBehaviour
     public DamageNumber GetFromPool() {
         DamageNumber numberToOutput = null;
 
-        if(numberPool.Count == 0) {
+        if(_numberPool.Count == 0) {
             numberToOutput = Instantiate(numberToSpawn, numberCanvas);
         } else {
-            numberToOutput = numberPool[0];
-            numberPool.RemoveAt(0);
+            numberToOutput = _numberPool[0];
+            _numberPool.RemoveAt(0);
         }
 
         return numberToOutput;
@@ -47,6 +47,6 @@ public class DamageNumberController : MonoBehaviour
 
     public void PlaceInPool(DamageNumber numberToPlace) {
         numberToPlace.gameObject.SetActive(false);
-        numberPool.Add(numberToPlace);
+        _numberPool.Add(numberToPlace);
     }
 }

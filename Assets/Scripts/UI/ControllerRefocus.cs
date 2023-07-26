@@ -3,18 +3,18 @@ using UnityEngine.EventSystems;
 
 // If there is no selected item, set the selected item to the event system's first selected item
 public class ControllerRefocus : MonoBehaviour {
-    private GameObject lastselect;
+    private GameObject _lastSelect;
 
     void Start() {
-        lastselect = new GameObject();
+        _lastSelect = new GameObject();
     }
 
     // Update is called once per frame
     void Update() {
         if (EventSystem.current.currentSelectedGameObject == null) {
-            EventSystem.current.SetSelectedGameObject(lastselect);
+            EventSystem.current.SetSelectedGameObject(_lastSelect);
         } else {
-            lastselect = EventSystem.current.currentSelectedGameObject;
+            _lastSelect = EventSystem.current.currentSelectedGameObject;
         }
     }
 
