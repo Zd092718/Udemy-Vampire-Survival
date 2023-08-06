@@ -34,4 +34,9 @@ public class LevelManager : MonoBehaviour
             UIController.Instance.UpdateTimer(_timer);
         }
     }
+
+    public void EndLevel() {
+        _gameActive = false;
+        UIController.Instance.DisplayGameOverScreen();
+    }
 }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 // ReSharper disable All
 
 public class UIController : MonoBehaviour
@@ -20,6 +21,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private PlayerStatController playerStatController;
     [SerializeField] private PlayerStatUpgradeDisplay moveSpeedUpgradeDisplay, healthUpgradeDisplay, pickupRangeUpgradeDisplay, maxWeaponsUpgradeDisplay;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TMP_Text endTimeText;
 
 
     #region Properties
@@ -79,6 +82,7 @@ public class UIController : MonoBehaviour
         float seconds = Mathf.FloorToInt(time % 60f);
 
         timerText.text = minutes + ":" + seconds.ToString("00");
+        endTimeText.text = minutes + ":" + seconds.ToString("00");
     }
 
     public void SetSelected() {
@@ -109,5 +113,22 @@ public class UIController : MonoBehaviour
     public void PurchaseMaxWeapons() {
         playerStatController.PurchaseMaxWeapons();
         SkipLevelUp();
+    }
+
+    public void DisplayGameOverScreen() {
+        StartCoroutine(GameOverDisplayWaitRoutine());
+    }
+
+    IEnumerator GameOverDisplayWaitRoutine() {
+        yield return new WaitForSeconds(2f);
+        gameOverPanel.SetActive(true);
+    }
+
+    public void RestartLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitToMenu() {
+        SceneManager.LoadScene("Menu");
     }
 }

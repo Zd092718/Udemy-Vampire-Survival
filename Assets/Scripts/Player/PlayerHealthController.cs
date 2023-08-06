@@ -12,6 +12,7 @@ public class PlayerHealthController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Image healthBarImage;
     [SerializeField] private PlayerStatController statController;
+    [SerializeField] private GameObject deathEffect;
 
     #region Properties
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -49,6 +50,8 @@ public class PlayerHealthController : MonoBehaviour
         if(currentHealth <= 0 ) {
             //Die
             gameObject.SetActive(false);
+            Instantiate(deathEffect, transform.position, transform.rotation);
+            LevelManager.Instance.EndLevel();
         }
         healthBarImage.fillAmount = (float)currentHealth / maxHealth;
         DamageNumberController.Instance.SpawnDamage(damage, transform.position, Color.red);
