@@ -38,5 +38,6 @@ public class LevelManager : MonoBehaviour
     public void EndLevel() {
         _gameActive = false;
         UIController.Instance.DisplayGameOverScreen();
+        UIController.Instance.SetGameOverSelected();
     }
 }

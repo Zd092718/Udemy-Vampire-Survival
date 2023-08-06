@@ -99,7 +99,7 @@ public class ExperienceLevelController : MonoBehaviour {
     private static void ActivateLevelUpPanel() {
         // Pull up level up screen and disable main menu controls
         UIController.Instance.LevelUpPanel.SetActive(true);
-        UIController.Instance.SetSelected();
+        UIController.Instance.SetLevelUpSelected();
         UIController.Instance.IsLevelingUp = true;
         Time.timeScale = 0f;
     }

@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private PlayerStatController playerStatController;
     [SerializeField] private PlayerStatUpgradeDisplay moveSpeedUpgradeDisplay, healthUpgradeDisplay, pickupRangeUpgradeDisplay, maxWeaponsUpgradeDisplay;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameOverSelectedFirst;
     [SerializeField] private TMP_Text endTimeText;
 
 
@@ -85,8 +86,12 @@ public class UIController : MonoBehaviour
         endTimeText.text = minutes + ":" + seconds.ToString("00");
     }
 
-    public void SetSelected() {
+    public void SetLevelUpSelected() {
         EventSystem.current.SetSelectedGameObject(levelUpSelectedFirst);
+    }
+
+    public void SetGameOverSelected() {
+        EventSystem.current.SetSelectedGameObject(gameOverSelectedFirst);
     }
 
     public void SkipLevelUp() {
