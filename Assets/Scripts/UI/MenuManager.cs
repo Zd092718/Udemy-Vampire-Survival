@@ -17,10 +17,15 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject mainMenuFirst;
     [SerializeField] private GameObject settingsMenuFirst;
 
+    [SerializeField] private bool isOnMainMenu;
+
     private bool _isPaused;
 
     private void Start() {
-        mainMenuCanvas.SetActive(false);
+        if (!isOnMainMenu)
+        {
+            mainMenuCanvas.SetActive(false);
+        }
         settingsCanvas.SetActive(false);
     }
 
@@ -87,7 +92,18 @@ public class MenuManager : MonoBehaviour {
 
     public void OnMainMenuPress() {
         //Go back to main menu
-        //SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void OnStartPress()
+    {
+        //Start Game
+        SceneManager.LoadScene("Main");
+    }
+
+    public void OnQuitPress()
+    {
+        Application.Quit(0);
     }
 
     #endregion

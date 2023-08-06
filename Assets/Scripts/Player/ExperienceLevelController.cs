@@ -12,6 +12,7 @@ public class ExperienceLevelController : MonoBehaviour {
     [SerializeField] private List<Weapon> weaponsToUpgrade;
     [SerializeField] private ExpPickup expPickup;
     [SerializeField] private Transform pickupPool;
+    [SerializeField] private PlayerStatController playerStatController;
 
     private void Awake() {
         if (Instance != null) {
@@ -91,6 +92,8 @@ public class ExperienceLevelController : MonoBehaviour {
                 UIController.Instance.LevelUpButtons[i].gameObject.SetActive(false);
             }
         }
+
+        playerStatController.UpdateDisplay();
     }
 
     private static void ActivateLevelUpPanel() {

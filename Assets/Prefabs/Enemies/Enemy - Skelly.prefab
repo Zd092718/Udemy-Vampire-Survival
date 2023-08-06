@@ -216,3 +216,5 @@ MonoBehaviour:
   health: 10
   knockbackTime: 0.5
   enemyExpValue: 0
+  coinValue: 1
+  coinDropRate: 0.5

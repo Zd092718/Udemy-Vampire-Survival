@@ -11,8 +11,13 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] private float currentHealth, maxHealth;
     [Header("References")]
     [SerializeField] private Image healthBarImage;
- 
+    [SerializeField] private PlayerStatController statController;
 
+    #region Properties
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
+
+    #endregion
 
     private void Awake() {
         if(Instance != null) {
@@ -23,8 +28,11 @@ public class PlayerHealthController : MonoBehaviour
 
     void Start()
     {
-        healthBarImage.fillAmount = maxHealth;
+        maxHealth = statController.Health[0].value;
+
         currentHealth = maxHealth;
+
+        healthBarImage.fillAmount = maxHealth;
     }
 
     // Update is called once per frame

@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameInput gameInput;
     [SerializeField] private List<Weapon> unassignedWeapons, assignedWeapons;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private PlayerStatController playerStatController;
     private List<Weapon> _fullyLeveledWeapons = new List<Weapon>();
     private Vector3 _moveDirection;
     private Animator _anim;
@@ -98,8 +100,12 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         if(assignedWeapons.Count == 0) {
-        AddWeapon(Random.Range(0, unassignedWeapons.Count)); 
+            AddWeapon(Random.Range(0, unassignedWeapons.Count)); 
         }
+
+        moveSpeed = playerStatController.MoveSpeed[0].value;
+        pickupRange = playerStatController.PickupRange[0].value;
+        maxWeapons = Mathf.RoundToInt(playerStatController.MaxWeapons[0].value);
     }
 
     private void FixedUpdate() {
@@ -109,7 +115,15 @@ public class PlayerController : MonoBehaviour
     private void Move() {
 
         _moveDirection = gameInput.GetMovementVectorNormalized();
-        transform.position += _moveDirection * moveSpeed * Time.deltaTime;
+        if (_moveDirection.x > 0)
+        {
+            sprite.flipX = true;
+        } else if (_moveDirection.x < 0)
+        {
+            sprite.flipX = false;
+        }
+
+        transform.position += _moveDirection * (moveSpeed * Time.deltaTime);
 
         if(_moveDirection != Vector3.zero) {
             _anim.SetBool("IsWalking", true);

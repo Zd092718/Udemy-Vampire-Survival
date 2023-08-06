@@ -10,12 +10,16 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance { get; private set; }
 
-    [Header("Level Settings & References")]
+    [Header("References")]
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private Slider xpSlider;
     [SerializeField] private LevelUpSelectionButton[] levelUpButtons;
     [SerializeField] private GameObject levelUpPanel;
     [SerializeField] private GameObject levelUpSelectedFirst;
+    [SerializeField] private TMP_Text coinText;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private PlayerStatController playerStatController;
+    [SerializeField] private PlayerStatUpgradeDisplay moveSpeedUpgradeDisplay, healthUpgradeDisplay, pickupRangeUpgradeDisplay, maxWeaponsUpgradeDisplay;
 
 
     #region Properties
@@ -45,6 +49,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public PlayerStatUpgradeDisplay MoveSpeedUpgradeDisplay { get => moveSpeedUpgradeDisplay; set => moveSpeedUpgradeDisplay = value; }
+    public PlayerStatUpgradeDisplay HealthUpgradeDisplay { get => healthUpgradeDisplay; set => healthUpgradeDisplay = value; }
+    public PlayerStatUpgradeDisplay PickupRangeUpgradeDisplay { get => pickupRangeUpgradeDisplay; set => pickupRangeUpgradeDisplay = value; }
+    public PlayerStatUpgradeDisplay MaxWeaponsUpgradeDisplay { get => maxWeaponsUpgradeDisplay; set => maxWeaponsUpgradeDisplay = value; }
+
     #endregion
 
     private void Awake() {
@@ -61,6 +70,17 @@ public class UIController : MonoBehaviour
         levelText.text = $"Level: {currentLevel}";
     }
 
+    public void UpdateCoins(int currentCoins) {
+        coinText.text = $"Coins: {currentCoins}";
+    }
+
+    public void UpdateTimer(float time) {
+        float minutes = Mathf.FloorToInt(time / 60f);
+        float seconds = Mathf.FloorToInt(time % 60f);
+
+        timerText.text = minutes + ":" + seconds.ToString("00");
+    }
+
     public void SetSelected() {
         EventSystem.current.SetSelectedGameObject(levelUpSelectedFirst);
     }
@@ -69,5 +89,25 @@ public class UIController : MonoBehaviour
         IsLevelingUp = false;
         levelUpPanel.SetActive(false);
         Time.timeScale = 1.0f;
+    }
+
+    public void PurchaseMoveSpeed() {
+        playerStatController.PurchaseMoveSpeed();
+        SkipLevelUp();
+    }
+
+    public void PurchaseHealth() {
+        playerStatController.PurchaseHealth();
+        SkipLevelUp() ;
+    }
+
+    public void PurchasePickupRange() {
+        playerStatController.PurchasePickupRange();
+        SkipLevelUp();
+    }
+
+    public void PurchaseMaxWeapons() {
+        playerStatController.PurchaseMaxWeapons();
+        SkipLevelUp();
     }
 }

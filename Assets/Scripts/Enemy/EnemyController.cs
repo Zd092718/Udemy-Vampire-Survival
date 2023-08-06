@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float health = 5f;
     [SerializeField] private float knockbackTime = .5f;
     [SerializeField] private int enemyExpValue;
+    [SerializeField] private int coinValue = 1;
+    [SerializeField] private float coinDropRate = .5f;
     private float _knockbackCounter;
     private float _hitCounter;
     private Rigidbody2D _rb;
@@ -21,12 +23,18 @@ public class EnemyController : MonoBehaviour
         _target = PlayerHealthController.Instance.transform;
     }
 
-    private void Update() {
+    private void Update()
+    {
         CheckKnockback();
         GiveChase();
         if (_hitCounter > 0f) {
             _hitCounter -= Time.deltaTime;
         }
+        if (!PlayerController.Instance.gameObject.activeSelf)
+        {
+            _rb.velocity = Vector2.zero;
+        }
+            
     }
 
     private void CheckKnockback() {
@@ -46,7 +54,7 @@ public class EnemyController : MonoBehaviour
         _rb.velocity = (_target.position - transform.position).normalized * moveSpeed;
     }   
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionStay2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player") && _hitCounter <= 0) {
             PlayerHealthController.Instance.TakeDamage(damageDone);
             _hitCounter = hitWaitTime;
@@ -60,6 +68,10 @@ public class EnemyController : MonoBehaviour
         if(health <= 0f) {
             Destroy(gameObject);
             ExperienceLevelController.Instance.SpawnExp(transform.position, enemyExpValue);
+            
+            if(Random.value <= coinDropRate) {
+                CoinController.Instance.DropCoin(transform.position, coinValue);
+            }
         }
 
         DamageNumberController.Instance.SpawnDamage(damage, transform.position, Color.white);
